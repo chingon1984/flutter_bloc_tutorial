@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../business_logic/cubit/counter_cubit.dart';
 
-class SecondScreen extends StatelessWidget{
-  const SecondScreen({Key? key, required this.title, required this.color}) : super(key: key);
+class ThirdScreen extends StatelessWidget{
+  const ThirdScreen({Key? key, required this.title, required this.color}) : super(key: key);
 
   final String title;
   final Color color;
@@ -82,10 +82,10 @@ class SecondScreen extends StatelessWidget{
             MaterialButton(
                 color: color,
                 child: const Text(
-                    'Go to third screen!'
+                    'Go to second screen!'
                 ),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/third');
+
                 }
             )
           ],

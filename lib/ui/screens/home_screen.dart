@@ -1,18 +1,19 @@
-import 'package:bloc_tutorial/ui/screens/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../business_logic/cubit/counter_cubit.dart';
 
-class MyHomeScreen extends StatelessWidget {
-  const MyHomeScreen({Key? key, required this.title, required this.color})
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key, required this.title, required this.color})
       : super(key: key);
 
   final String title;
   final Color color;
 
+
   @override
   Widget build(BuildContext context) {
+    print('inside build');
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -30,20 +31,21 @@ class MyHomeScreen extends StatelessWidget {
                 if (state.wasIncremented!) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('Incremented!'),
+                      content: Text('Incremented in home!'),
                       duration: Duration(milliseconds: 300),
                     ),
                   );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('Decremented!'),
+                      content: Text('Decremented in home!'),
                       duration: Duration(milliseconds: 300),
                     ),
                   );
                 }
               },
               builder: (context, state) {
+                print('inside builder');
                 return Text(
                   '${state.counterValue}',
                   style: Theme.of(context).textTheme.headlineMedium,
@@ -85,14 +87,7 @@ class MyHomeScreen extends StatelessWidget {
                 color: color,
                 child: const Text('Go to second screen!'),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    // providing the bloc instance to new route
-                    // creating a NEW context for new route. referning to old context!!
-                      builder: (newContext) => BlocProvider.value(
-                        value: BlocProvider.of<CounterCubit>(context),
-                        child: const SecondScreen(
-                            title: 'Second screen', color: Colors.red),
-                      )));
+                  Navigator.of(context).pushNamed('/second');
                 })
           ],
         ),
