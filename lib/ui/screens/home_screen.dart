@@ -27,18 +27,18 @@ class HomeScreen extends StatelessWidget {
               'You have pushed the button this many times:',
             ),
             BlocConsumer<CounterCubit, CounterState>(
-              listener: (context, state) {
+              listener: (newContext, state) {
                 if (state.wasIncremented!) {
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  ScaffoldMessenger.of(newContext).showSnackBar(
                     const SnackBar(
-                      content: Text('Incremented in home!'),
+                      content: Text('Incremented!'),
                       duration: Duration(milliseconds: 300),
                     ),
                   );
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  ScaffoldMessenger.of(newContext).showSnackBar(
                     const SnackBar(
-                      content: Text('Decremented in home!'),
+                      content: Text('Decremented!'),
                       duration: Duration(milliseconds: 300),
                     ),
                   );

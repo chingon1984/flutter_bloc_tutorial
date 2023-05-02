@@ -23,24 +23,7 @@ class SecondScreen extends StatelessWidget{
             const Text(
               'You have pushed the button this many times:',
             ),
-            BlocConsumer<CounterCubit, CounterState>(
-              listener: (context, state) {
-                if (state.wasIncremented!) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Incremented!'),
-                      duration: Duration(milliseconds: 300),
-                    ),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Decremented!'),
-                      duration: Duration(milliseconds: 300),
-                    ),
-                  );
-                }
-              },
+            BlocBuilder<CounterCubit, CounterState>(
               builder: (context, state) {
                 return Text(
                   '${state.counterValue}',
