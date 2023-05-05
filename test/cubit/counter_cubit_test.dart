@@ -30,14 +30,14 @@ void main() {
       'cubit -> emit -> counterstate(1, true) when cubit.increment',
       build: () => CounterCubit(),
       act: (cubit) => cubit.increment(),
-      expect: () => <CounterState>[CounterState(counterValue: 1, wasIncremented: true)],
+      expect: () => <CounterState>[const CounterState(counterValue: 1, wasIncremented: true)],
     );
 
     blocTest<CounterCubit, CounterState>(
       'cubit -> emit -> counterstate(-1, true) when cubit.decrement',
       build: () => CounterCubit(),
       act: (cubit) => cubit.decrement(),
-      expect: () => <CounterState>[CounterState(counterValue: -1, wasIncremented: false)],
+      expect: () => <CounterState>[const CounterState(counterValue: -1, wasIncremented: false)],
     );
 
   });

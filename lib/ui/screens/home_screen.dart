@@ -1,3 +1,5 @@
+import 'package:bloc_tutorial/business_logic/cubit/internet_cubit.dart';
+import 'package:bloc_tutorial/constants/enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,10 +12,8 @@ class HomeScreen extends StatelessWidget {
   final String title;
   final Color color;
 
-
   @override
   Widget build(BuildContext context) {
-    print('inside build');
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -23,9 +23,27 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            BlocBuilder<InternetCubit, InternetState>(
+                builder: (context, state) {
+              if (state is InternetConnected && state.connectionType == ConnectionType.wifi) {
+                return Text(
+                    'Wifi',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Colors.red),
+                );
+              }
+
+              if(state is InternetConnected && state.connectionType == ConnectionType.mobile) {
+                return Text(
+                  'Mobile',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Colors.green),
+                );
+              }
+
+              return Text(
+                'Disconnected',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Colors.grey),
+              );
+            }),
             BlocConsumer<CounterCubit, CounterState>(
               listener: (newContext, state) {
                 if (state.wasIncremented!) {
@@ -45,40 +63,11 @@ class HomeScreen extends StatelessWidget {
                 }
               },
               builder: (context, state) {
-                print('inside builder');
                 return Text(
                   '${state.counterValue}',
                   style: Theme.of(context).textTheme.headlineMedium,
                 );
               },
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FloatingActionButton(
-                  backgroundColor: color,
-                  heroTag: Text(title),
-                  onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).decrement();
-                    // context.bloc<CounterCubit>().decrement();
-                  },
-                  tooltip: 'Decrement',
-                  child: const Icon(Icons.remove),
-                ),
-                FloatingActionButton(
-                  backgroundColor: color,
-                  heroTag: Text('$title #2'),
-                  onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).increment();
-                    // context.bloc<CounterCubit>().increment();
-                  },
-                  tooltip: 'Increment',
-                  child: const Icon(Icons.add),
-                ),
-              ],
             ),
             const SizedBox(
               height: 24,
