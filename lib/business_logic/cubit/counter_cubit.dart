@@ -10,14 +10,13 @@ part 'counter_state.dart';
 
 class CounterCubit extends Cubit<CounterState> {
   final InternetCubit internetCubit;
-  late StreamSubscription internetStreamSubscription;
 
   CounterCubit(this.internetCubit) : super(const CounterState(counterValue: 0)) {
     _monitorInternetCubit();
   }
 
   void _monitorInternetCubit() {
-    internetStreamSubscription = internetCubit.stream.listen((internetState) {
+    internetCubit.stream.listen((internetState) {
       if (internetState is InternetConnected && internetState.connectionType == ConnectionType.wifi) {
         increment();
         return;
