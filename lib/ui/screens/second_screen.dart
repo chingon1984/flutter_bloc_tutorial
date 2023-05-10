@@ -41,7 +41,7 @@ class SecondScreen extends StatelessWidget{
                   backgroundColor: color,
                   heroTag: Text(title),
                   onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).decrement();
+                    context.read<CounterCubit>().decrement();
                     // context.bloc<CounterCubit>().decrement();
                   },
                   tooltip: 'Decrement',
@@ -51,7 +51,7 @@ class SecondScreen extends StatelessWidget{
                   backgroundColor: color,
                   heroTag: Text('$title #2'),
                   onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).increment();
+                    context.read<CounterCubit>().increment();
                     // context.bloc<CounterCubit>().increment();
                   },
                   tooltip: 'Increment',
