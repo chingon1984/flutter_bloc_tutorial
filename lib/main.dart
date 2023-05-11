@@ -1,4 +1,5 @@
 import 'package:bloc_tutorial/business_logic/cubit/counter_cubit.dart';
+import 'package:bloc_tutorial/business_logic/cubit/settings_cubit.dart';
 import 'package:bloc_tutorial/ui/router/app_router.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<CounterCubit>(
           create: (context) => CounterCubit(),
+        ),
+        BlocProvider<SettingsCubit>(
+            create: (context) => SettingsCubit()
         )
       ],
       child: MaterialApp(

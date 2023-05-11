@@ -18,6 +18,11 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
         backgroundColor: color,
+        actions: [
+          IconButton(
+              onPressed:() => Navigator.of(context).pushNamed('/settings'),
+              icon: const Icon(Icons.settings))
+        ],
       ),
       body: Center(
         child: Column(
