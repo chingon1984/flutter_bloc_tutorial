@@ -12,4 +12,23 @@ class CounterState extends Equatable{
 
   @override
   List<Object> get props => [counterValue, wasIncremented ?? false];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'counterValue': counterValue,
+      'wasIncremented': wasIncremented,
+    };
+  }
+
+  factory CounterState.fromMap(Map<String, dynamic> map) {
+    return CounterState(
+      counterValue: map['counterValue'] as int,
+      wasIncremented: map['wasIncremented'] as bool,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'CounterState{counterValue: $counterValue, wasIncremented: $wasIncremented}';
+  }
 }

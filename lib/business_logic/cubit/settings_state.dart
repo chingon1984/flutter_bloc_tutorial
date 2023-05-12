@@ -11,4 +11,23 @@ class SettingsState {
         appNotifications: appNotifications ?? this.appNotifications,
         emailNotifications: emailNotifications ?? this.emailNotifications);
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'appNotifications': appNotifications,
+      'emailNotifications': emailNotifications,
+    };
+  }
+
+  factory SettingsState.fromMap(Map<String, dynamic> map) {
+    return SettingsState(
+      appNotifications: map['appNotifications'] as bool,
+      emailNotifications: map['emailNotifications'] as bool,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'SettingsState{appNotifications: $appNotifications, emailNotifications: $emailNotifications}';
+  }
 }

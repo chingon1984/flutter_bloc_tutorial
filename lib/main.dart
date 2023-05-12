@@ -1,13 +1,23 @@
 import 'package:bloc_tutorial/business_logic/cubit/counter_cubit.dart';
 import 'package:bloc_tutorial/business_logic/cubit/settings_cubit.dart';
+import 'package:bloc_tutorial/business_logic/utility/app_bloc_observer.dart';
 import 'package:bloc_tutorial/ui/router/app_router.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'business_logic/cubit/internet_cubit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory());
+
+  Bloc.observer = AppBlocObserver();
+
   runApp(
       MyApp(
           AppRouter(),
@@ -35,7 +45,8 @@ class MyApp extends StatelessWidget {
           create: (context) => CounterCubit(),
         ),
         BlocProvider<SettingsCubit>(
-            create: (context) => SettingsCubit()
+            create: (context) => SettingsCubit(),
+            lazy: false,
         )
       ],
       child: MaterialApp(
